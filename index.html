@@ -1,33 +1,744 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TECOTEC - Giải pháp MonitEM Wavecontrol</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-      body {
-        margin: 0;
-        font-family: 'Roboto', sans-serif;
-        background-color: #f8f9fa;
-        color: #333;
-      }
+        :root {
+            --primary: #ff9900;
+            --secondary: #146eb4;
+            --dark: #2c3e50;
+            --text: #333333;
+            --light-grey: #f8f9fa;
+            --border: #dddddd;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            border-bottom: 4px solid var(--secondary);
+            padding: 20px 0;
+            background-color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+            line-height: 1;
+        }
+
+        .logo-sub {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 3px;
+        }
+
+        .header-tagline {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* --- Layout --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+        }
+
+        /* --- Sidebar TOC --- */
+        aside {
+            flex: 0 0 280px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            z-index: 90;
+        }
+
+        .toc-box {
+            background-color: var(--light-grey);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: default;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 10px;
+        }
+
+        .toc-link {
+            text-decoration: none;
+            color: #444;
+            font-size: 0.95rem;
+            display: block;
+            padding: 4px 0;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .toc-link:hover {
+            color: var(--primary);
+        }
+
+        .toc-sub-list {
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 5px;
+            border-left: 2px solid #ddd;
+        }
+
+        .toc-sub-link {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.85rem;
+            display: block;
+            padding: 2px 0;
+            transition: color 0.2s;
+        }
+
+        .toc-sub-link:hover {
+            color: var(--primary);
+        }
+
+        /* --- Main Content --- */
+        main {
+            flex: 1;
+            min-width: 0; /* Prevents flex item from overflowing */
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: var(--secondary);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: var(--secondary);
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--dark);
+        }
+
+        /* --- Figures --- */
+        figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        figcaption {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        /* --- Feature Grid --- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        /* --- Tables --- */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        thead tr {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        /* --- Info Boxes --- */
+        .info-box {
+            background-color: #eef6fc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .project-box {
+            margin-bottom: 40px;
+        }
+
+        .project-highlight {
+            background-color: #fcfcfc;
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .scale-box {
+            background-color: #fff3e0;
+            padding: 15px 15px 15px 30px;
+            border-radius: 4px;
+        }
+
+        /* --- Contact Block --- */
+        .contact-block {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .contact-block p {
+            text-align: center;
+            color: #eee;
+        }
+        
+        .contact-block strong {
+            color: #fff;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #222;
+            color: #888;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .header-tagline {
+                display: none;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            aside {
+                position: relative;
+                top: 0;
+                width: 100%;
+                flex: none;
+            }
+
+            .toc-title {
+                cursor: pointer;
+            }
+
+            .toc-content {
+                display: none;
+            }
+
+            .toc-content.open {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
-  }
-}
-</script>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-group">
+                <span class="logo-main">TECOTEC</span>
+                <span class="logo-sub">GROUP</span>
+            </div>
+            <div class="header-tagline">
+                GIẢI PHÁP CÔNG NGHỆ & ĐO LƯỜNG
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <!-- Sidebar TOC -->
+        <aside>
+            <div class="toc-box">
+                <div class="toc-title" id="tocToggle">
+                    MỤC LỤC NỘI DUNG
+                    <span id="tocIcon" style="font-size: 1.2rem; display: none;">+</span>
+                </div>
+                <div class="toc-content" id="tocContent">
+                    <ul class="toc-list">
+                        <li><a href="#intro" class="toc-link">1. Giới thiệu về Wavecontrol</a></li>
+                        <li><a href="#solution" class="toc-link">2. Giải pháp MonitEM</a></li>
+                        <li><a href="#features" class="toc-link">2.2. Tính năng nổi bật</a></li>
+                        <li><a href="#architecture" class="toc-link">2.3. Mô hình lắp đặt</a></li>
+                        <li><a href="#probes" class="toc-link">2.4. Các đầu đo trường</a></li>
+                        <li>
+                            <a href="#projects" class="toc-link">2.5. Dự án thực tế</a>
+                            <ul class="toc-sub-list">
+                                <li><a href="#telecom" class="toc-sub-link">Lĩnh vực viễn thông</a></li>
+                                <li><a href="#tunisia" class="toc-sub-link">Tunisia (ANF)</a></li>
+                                <li><a href="#qatar" class="toc-sub-link">Qatar (World Cup 2022)</a></li>
+                                <li><a href="#serbia" class="toc-sub-link">Xéc-bi-a (RATEL)</a></li>
+                                <li><a href="#brazil" class="toc-sub-link">Brazil (Anatel)</a></li>
+                                <li><a href="#colombia" class="toc-sub-link">Colombia</a></li>
+                                <li><a href="#turkey" class="toc-sub-link">Thổ Nhĩ Kỳ</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div style="margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+                <h1>GIẢI PHÁP GIÁM SÁT LIÊN TỤC TRƯỜNG ĐIỆN TỪ (EMF) TRONG KHU VỰC - MONITEM</h1>
+                <div style="color: #777; font-style: italic; font-size: 0.95rem;">
+                    Giải pháp từ hãng Wavecontrol (Tây Ban Nha) - Phân phối bởi TECOTEC Group
+                </div>
+            </div>
+
+            <!-- Intro -->
+            <section id="intro">
+                <h2>1. GIỚI THIỆU VỀ WAVECONTROL</h2>
+                <p>
+                    <strong>Wavecontrol</strong> được thành lập năm 1997, là một công ty tiên phong trong lĩnh vực đo điện từ trường. 
+                    Công ty có trụ sở chính tại Châu Âu (Barcelona, Tây Ban Nha) và Hoa Kỳ (New Jersey).
+                </p>
+                <p>
+                    Mạng lưới các nhà phân phối của Wavecontrol trải rộng hơn 80 quốc gia trên toàn bộ 5 châu lục. 
+                    Trong đó tại thị trường Việt Nam, <strong>TECOTEC Group</strong> là nhà phân phối độc quyền các sản phẩm của Wavecontrol.
+                </p>
+                <div class="info-box">
+                    <strong>Lĩnh vực hoạt động chính:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>An toàn trường điện từ (RF/EMF Safety):</strong> Với gần 30 năm kinh nghiệm, Wavecontrol phát triển các thiết bị đo lường, giám sát mức độ phơi nhiễm EMF. Tất cả thiết bị đều đạt chuẩn và được hiệu chuẩn theo ISO 17025.</li>
+                        <li><strong>Hệ thống kiểm tra:</strong> Cung cấp linh kiện, thiết bị và hệ thống kiểm tra điện, tương thích điện từ trường (EMC), an toàn điện và đo ăng ten.</li>
+                    </ul>
+                </div>
+                <figure>
+                    <img src="https://placehold.co/800x400/146eb4/ffffff?text=Wavecontrol+Lab+(Anechoic+Chamber)" alt="Phòng thí nghiệm Wavecontrol">
+                    <figcaption>Phòng thí nghiệm và kiểm chuẩn của Wavecontrol tại Tây Ban Nha (Page 4 PDF)</figcaption>
+                </figure>
+            </section>
+
+            <!-- Solution -->
+            <section id="solution">
+                <h2>2. GIẢI PHÁP MONITEM - TỔNG QUAN</h2>
+                <p>
+                    Một trong những giải pháp nổi bật của Wavecontrol là hệ thống <strong>MonitEM</strong>. 
+                    Hệ thống cho phép giám sát các mức trường điện từ trong khu vực liên tục 24/7, suốt 365 ngày. 
+                    Giải pháp này giúp xác minh sự tuân thủ các tiêu chuẩn an toàn (ICNIRP, FCC, SC6, v.v.) do cơ quan có thẩm quyền thiết lập, 
+                    nhằm giảm thiểu nguy cơ phơi nhiễm hoặc cảnh báo người dân.
+                </p>
+                
+                <h3>Các thành phần chính của hệ thống:</h3>
+                <ul style="line-height: 1.8;">
+                    <li>
+                        <strong>Trạm giám sát MonitEM:</strong> Đặt gần các nguồn trường điện từ (ăng-ten, trạm gốc, đường dây điện) hoặc khu vực nhạy cảm (trường học, bệnh viện). 
+                        Trạm lấy mẫu liên tục, lưu trữ tạm thời và truyền dữ liệu về trung tâm.
+                    </li>
+                    <li>
+                        <strong>Trung tâm điều khiển:</strong> Quản lý các trạm giám sát, nhận dữ liệu qua Internet. 
+                        Cho phép người dùng được ủy quyền kiểm tra trạng thái từ bất kỳ đâu.
+                    </li>
+                    <li>
+                        <strong>Web công cộng (Tùy chọn):</strong> Công bố dữ liệu cho người dân theo dõi mức độ phơi nhiễm trong khu vực sinh sống.
+                    </li>
+                </ul>
+                <figure>
+                    <img src="https://placehold.co/800x500/ff9900/ffffff?text=Tram+Giam+Sat+MonitEM+Close-up" alt="Trạm giám sát MonitEM">
+                    <figcaption>Trạm giám sát MonitEM được lắp đặt thực tế (Page 5 PDF)</figcaption>
+                </figure>
+            </section>
+
+            <!-- Features -->
+            <section id="features">
+                <h2>2.2. TÍNH NĂNG NỔI BẬT</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Tuân thủ chuẩn quốc tế</h4>
+                        <p style="margin:0; font-size:0.95rem;">Phù hợp với khuyến nghị <strong>ITU-K.83</strong> về tiêu chuẩn thực hiện các mạng đo lường EMF.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Hoạt động 24/7/365</h4>
+                        <p style="margin:0; font-size:0.95rem;">Giám sát liên tục không gián đoạn, đảm bảo dữ liệu luôn được cập nhật.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Kết nối không dây</h4>
+                        <p style="margin:0; font-size:0.95rem;">Tích hợp Modem GPRS/3G/4G cho phép liên lạc hai chiều với trung tâm điều khiển.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Nguồn năng lượng linh hoạt</h4>
+                        <p style="margin:0; font-size:0.95rem;">Tùy chọn tấm pin năng lượng mặt trời giúp trạm hoạt động độc lập ở mọi vị trí.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Bền bỉ (IP66)</h4>
+                        <p style="margin:0; font-size:0.95rem;">Thiết kế chống bụi, chống nước IP66, chịu được điều kiện thời tiết khắc nghiệt ngoài trời.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Web Server thông minh</h4>
+                        <p style="margin:0; font-size:0.95rem;">Cấu hình từ xa, quản lý cảnh báo, tạo báo cáo và so sánh với các giới hạn tiêu chuẩn (ICNIRP 98, FCC, SC6...).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture -->
+            <section id="architecture">
+                <h2>2.3. MÔ HÌNH LẮP ĐẶT HỆ THỐNG</h2>
+                <p>
+                    Mô hình điển hình bao gồm các trạm thu thập dữ liệu tại hiện trường (Nguồn EMF -> Ăng ten/Probe -> MonitEM), 
+                    truyền tín hiệu qua mạng di động về Trung tâm điều khiển (Server thu nhận, phân tích).
+                </p>
+                <figure>
+                    <img src="https://placehold.co/900x400/f4f6f8/333333?text=So+Do+Nguyen+Ly+He+Thong+MonitEM+(Diagram)" alt="Sơ đồ nguyên lý">
+                    <figcaption>Sơ đồ nguyên lý hoạt động: Nguồn EMF -> MonitEM -> Trung tâm điều khiển (Page 9 PDF)</figcaption>
+                </figure>
+            </section>
+
+            <!-- Probes -->
+            <section id="probes">
+                <h2>2.4. CÁC ĐẦU ĐO TRƯỜNG TRÊN MONITEM</h2>
+                <p>Hệ thống hỗ trợ nhiều loại đầu đo để đáp ứng các dải tần số khác nhau:</p>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Loại đầu đo</th>
+                                <th>Model</th>
+                                <th>Dải tần số / Đặc điểm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Thấp tần</td>
+                                <td>WP50</td>
+                                <td>10 Hz – 3 kHz (Trường E & H)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" style="font-weight: bold;">Cao tần</td>
+                                <td>WPF3 / 6 / 8</td>
+                                <td>100 kHz – 3, 6, 8 GHz</td>
+                            </tr>
+                            <tr>
+                                <td>WPF18</td>
+                                <td>300 kHz – 18 GHz</td>
+                            </tr>
+                            <tr>
+                                <td>WPF40</td>
+                                <td>1 MHz – 40 GHz</td>
+                            </tr>
+                            <tr>
+                                <td>WPF60</td>
+                                <td>1 MHz – 60 GHz (Trường E)</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Di động</td>
+                                <td>Băng tần di động</td>
+                                <td>GSM, UMTS, LTE (Trường E)</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Từ trường</td>
+                                <td>Probes H</td>
+                                <td>300 kHz – 1 GHz (Trường H)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <figure>
+                    <img src="https://placehold.co/800x300/ddd/333?text=Hinh+Anh+Cac+Loai+Dau+Do+(Probes)" alt="Các loại đầu đo">
+                    <figcaption>Các loại đầu đo trường điện từ chuyên dụng (Page 10 PDF)</figcaption>
+                </figure>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects">
+                <h2>2.5. CÁC DỰ ÁN ĐÃ TRIỂN KHAI THỰC TẾ</h2>
+                
+                <!-- Telecom -->
+                <div id="telecom" class="project-box">
+                    <h3>2.5.1. Ứng dụng trong lĩnh vực viễn thông</h3>
+                    <p>
+                        Các hệ thống điện thoại di động và phát sóng là nguồn bức xạ chính. Các phép đo thường sử dụng đầu dò trường E (ví dụ WPF8) cho điều kiện trường xa 
+                        hoặc đầu dò trường H cho tần số thấp (trường gần).
+                    </p>
+                    <p><strong>Tiêu chuẩn tham chiếu:</strong> IEC 62232, EN 50492 (trạm gốc), EN 50401 (thiết bị vô tuyến).</p>
+                    <figure>
+                        <img src="https://placehold.co/800x350/2c3e50/ffffff?text=Xe+Co+Dong+Do+Kiem+EMF+(Drive+Test)" alt="Xe đo kiểm cơ động">
+                        <figcaption>Giải pháp đo kiểm lắp đặt trên xe cơ động (Drive Test) (Page 11 PDF)</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Tunisia -->
+                <div id="tunisia" class="project-box project-highlight">
+                    <h3 style="margin-top: 0;">2.5.2. Tunisia (Cơ quan ANF)</h3>
+                    <p>
+                        Dự án triển khai <strong>16 trạm MonitEM</strong> và 3 bộ thiết bị di động SMP2. 
+                        Với sự xuất hiện của 5G, cơ quan ANF kiểm soát chặt chẽ và công khai thông tin minh bạch trên website.
+                    </p>
+                    <p>
+                        Người dân có thể truy cập website công cộng hoặc ứng dụng điện thoại để xem mức độ phơi nhiễm tại vị trí của mình so với giới hạn quy định.
+                    </p>
+                    <figure>
+                        <img src="https://placehold.co/800x400/e70013/ffffff?text=Tunisia+Public+Map+Interface" alt="Bản đồ Tunisia">
+                        <figcaption>Giao diện bản đồ giám sát công khai tại Tunisia (Page 13 PDF)</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Qatar -->
+                <div id="qatar" class="project-box">
+                    <h3>2.5.3. Qatar (FIFA World Cup 2022)</h3>
+                    <p>
+                        Dự án do Bộ đô thị và môi trường (MME) thực hiện. Đây là dự án đầu tiên trong khu vực nhằm đánh giá quy định hiện hành chuẩn bị cho <strong>FIFA World Cup 2022</strong>.
+                    </p>
+                    <div class="scale-box">
+                        <ul>
+                            <li><strong>Quy mô:</strong> 40 trạm MonitEM + WP60.</li>
+                            <li><strong>Thiết bị cầm tay:</strong> 20 bộ SMP2 + WPF60 + WP400.</li>
+                            <li><strong>Xe cơ động:</strong> Hệ thống MapEM tìm kiếm các "điểm nóng".</li>
+                        </ul>
+                    </div>
+                    <figure>
+                        <img src="https://placehold.co/800x400/800000/ffffff?text=Qatar+Stadium+Monitoring+(FIFA)" alt="Sân vận động Qatar">
+                        <figcaption>Giám sát EMF tại sân vận động và không gian công cộng tại Qatar (Page 14 PDF)</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Serbia -->
+                <div id="serbia" class="project-box">
+                    <h3>2.5.4. Xéc-bi-a (RATEL)</h3>
+                    <p>
+                        Cơ quan quản lý truyền thông điện tử (RATEL) bắt đầu dự án từ năm 2016.
+                        Hệ thống bao gồm <strong>30 trạm MonitEM</strong> và các đầu đo WPF8, tạo thành mạng lưới giám sát quốc gia.
+                    </p>
+                </div>
+
+                <!-- Brazil -->
+                <div id="brazil" class="project-box project-highlight">
+                    <h3 style="margin-top: 0;">2.5.5. Brazil (Anatel)</h3>
+                    <p>
+                        Cơ quan Viễn thông Quốc gia Brazil (Anatel) đã tăng gấp đôi năng lực đánh giá EMF để phục vụ <strong>World Cup 2014</strong> và <strong>Olympics</strong>.
+                        Hệ thống đảm bảo độ tin cậy khi sử dụng nguồn tài nguyên phổ tần.
+                    </p>
+                    <ul style="margin-bottom: 20px;">
+                        <li><strong>Quy mô:</strong> 66 trạm thiết bị (MonitEM + MapEM).</li>
+                        <li><strong>Đặc điểm:</strong> Lắp đặt tạm thời tại sân vận động (dùng tripod) và cố định.</li>
+                        <li><strong>Cam kết:</strong> Bảo hành 5 năm, thay thế thiết bị trong 15 ngày.</li>
+                    </ul>
+                    <figure>
+                        <img src="https://placehold.co/800x400/009c3b/ffffff?text=Brazil+Stadium+Setup" alt="Sân vận động Brazil">
+                        <figcaption>Lắp đặt thiết bị đo liên tục trong suốt quá trình diễn ra sự kiện thể thao (Page 16 PDF)</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Colombia -->
+                <div id="colombia" class="project-box">
+                    <h3>2.5.6. Colombia</h3>
+                    <p>
+                        Mục tiêu đo lường và kiểm soát bức xạ viễn thông nhằm giảm lo ngại của người dân, hỗ trợ tăng tốc triển khai mạng 4G.
+                    </p>
+                    <p><strong>Quy mô:</strong> 43 trạm tại 10 thành phố lớn.</p>
+                </div>
+
+                <!-- Turkey -->
+                <div id="turkey" class="project-box">
+                    <h3>2.5.7. Thổ Nhĩ Kỳ</h3>
+                    <p>
+                        Triển khai mạng lưới cảm biến rộng khắp lãnh thổ từ tháng 8/2013.
+                        Các trạm được lắp đặt tại trường học, bệnh viện, cao ốc. Kết quả đo được công bố trực tuyến tại website chính phủ.
+                    </p>
+                    <figure>
+                        <img src="https://placehold.co/800x400/e30a17/ffffff?text=Turkey+Sensor+Network+Map" alt="Bản đồ Thổ Nhĩ Kỳ">
+                        <figcaption>Bản đồ vị trí các trạm giám sát thí điểm tại Thổ Nhĩ Kỳ (Page 19 PDF)</figcaption>
+                    </figure>
+                </div>
+
+            </section>
+
+            <!-- Contact -->
+            <div class="contact-block">
+                <h2 style="font-size: 1.8rem; margin-bottom: 20px; border-bottom: none; color: white;">LIÊN HỆ TƯ VẤN GIẢI PHÁP</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px;">
+                    TECOTEC Group cam kết cung cấp giải pháp Wavecontrol chính hãng, hỗ trợ kỹ thuật chuyên sâu và dịch vụ sau bán hàng chuyên nghiệp.
+                </p>
+                <div style="font-size: 1rem; line-height: 1.8;">
+                    <p><strong>CÔNG TY CỔ PHẦN TECOTEC GROUP</strong></p>
+                    <p>📍 Tầng 2, Tòa nhà CT3A, KĐT Mễ Trì Thượng, Nam Từ Liêm, Hà Nội</p>
+                    <p>🌐 <a href="http://www.tecotec.com.vn" style="color: #fff; text-decoration: underline;">www.tecotec.com.vn</a></p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2024 TECOTEC GROUP. All rights reserved.
+    </footer>
+
+    <script>
+        // JS Logic for Mobile TOC
+        document.addEventListener('DOMContentLoaded', () => {
+            const tocToggle = document.getElementById('tocToggle');
+            const tocContent = document.getElementById('tocContent');
+            const tocIcon = document.getElementById('tocIcon');
+            let isOpen = false;
+
+            // Check if mobile
+            const checkMobile = () => {
+                if (window.innerWidth <= 768) {
+                    tocIcon.style.display = 'block';
+                    tocContent.classList.remove('open');
+                    isOpen = false;
+                    tocIcon.textContent = '+';
+                } else {
+                    tocIcon.style.display = 'none';
+                    tocContent.classList.add('open');
+                }
+            };
+
+            // Toggle function
+            tocToggle.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    isOpen = !isOpen;
+                    if (isOpen) {
+                        tocContent.classList.add('open');
+                        tocIcon.textContent = '-';
+                    } else {
+                        tocContent.classList.remove('open');
+                        tocIcon.textContent = '+';
+                    }
+                }
+            });
+
+            // Smooth scroll link click closes TOC on mobile
+            const links = document.querySelectorAll('.toc-link, .toc-sub-link');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        tocContent.classList.remove('open');
+                        isOpen = false;
+                        tocIcon.textContent = '+';
+                    }
+                });
+            });
+
+            window.addEventListener('resize', checkMobile);
+            checkMobile(); // Initial check
+        });
+    </script>
+</body>
 </html>
