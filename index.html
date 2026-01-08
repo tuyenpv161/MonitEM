@@ -30,51 +30,6 @@
             line-height: 1.6;
         }
 
-        /* --- Header --- */
-        header {
-            border-bottom: 4px solid var(--secondary);
-            padding: 20px 0;
-            background-color: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-main {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--secondary);
-            line-height: 1;
-        }
-
-        .logo-sub {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 3px;
-        }
-
-        .header-tagline {
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
-        }
-
         /* --- Layout --- */
         .main-container {
             max-width: 1200px;
@@ -89,7 +44,7 @@
             flex: 0 0 280px;
             height: fit-content;
             position: sticky;
-            top: 100px;
+            top: 20px; /* Adjusted since header is removed */
             z-index: 90;
         }
 
@@ -317,12 +272,9 @@
 
         /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
-            .header-tagline {
-                display: none;
-            }
-
             .main-container {
                 flex-direction: column;
+                margin-top: 20px;
             }
 
             aside {
@@ -355,18 +307,6 @@
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-container">
-            <div class="logo-group">
-                <span class="logo-main">TECOTEC</span>
-                <span class="logo-sub">GROUP</span>
-            </div>
-            <div class="header-tagline">
-                GIẢI PHÁP CÔNG NGHỆ & ĐO LƯỜNG
-            </div>
-        </div>
-    </header>
 
     <div class="main-container">
         
@@ -429,8 +369,8 @@
                     </ul>
                 </div>
                 <figure>
-                    <img src="https://placehold.co/800x400/146eb4/ffffff?text=Wavecontrol+Lab+(Anechoic+Chamber)" alt="Phòng thí nghiệm Wavecontrol">
-                    <figcaption>Phòng thí nghiệm và kiểm chuẩn của Wavecontrol tại Tây Ban Nha (Page 4 PDF)</figcaption>
+                    <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image001.png" alt="Phòng thí nghiệm Wavecontrol">
+                    <figcaption>Phòng thí nghiệm và kiểm chuẩn của Wavecontrol tại Tây Ban Nha</figcaption>
                 </figure>
             </section>
 
@@ -459,8 +399,8 @@
                     </li>
                 </ul>
                 <figure>
-                    <img src="https://placehold.co/800x500/ff9900/ffffff?text=Tram+Giam+Sat+MonitEM+Close-up" alt="Trạm giám sát MonitEM">
-                    <figcaption>Trạm giám sát MonitEM được lắp đặt thực tế (Page 5 PDF)</figcaption>
+                    <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image002.png" alt="Trạm giám sát MonitEM">
+                    <figcaption>Trạm giám sát MonitEM được lắp đặt thực tế</figcaption>
                 </figure>
             </section>
 
@@ -503,8 +443,8 @@
                     truyền tín hiệu qua mạng di động về Trung tâm điều khiển (Server thu nhận, phân tích).
                 </p>
                 <figure>
-                    <img src="https://placehold.co/900x400/f4f6f8/333333?text=So+Do+Nguyen+Ly+He+Thong+MonitEM+(Diagram)" alt="Sơ đồ nguyên lý">
-                    <figcaption>Sơ đồ nguyên lý hoạt động: Nguồn EMF -> MonitEM -> Trung tâm điều khiển (Page 9 PDF)</figcaption>
+                    <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image003.png" alt="Sơ đồ nguyên lý">
+                    <figcaption>Sơ đồ nguyên lý hoạt động: Nguồn EMF -> MonitEM -> Trung tâm điều khiển</figcaption>
                 </figure>
             </section>
 
@@ -560,8 +500,8 @@
                 </div>
                 
                 <figure>
-                    <img src="https://placehold.co/800x300/ddd/333?text=Hinh+Anh+Cac+Loai+Dau+Do+(Probes)" alt="Các loại đầu đo">
-                    <figcaption>Các loại đầu đo trường điện từ chuyên dụng (Page 10 PDF)</figcaption>
+                    <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image004.png" alt="Các loại đầu đo">
+                    <figcaption>Các loại đầu đo trường điện từ chuyên dụng</figcaption>
                 </figure>
             </section>
 
@@ -578,8 +518,8 @@
                     </p>
                     <p><strong>Tiêu chuẩn tham chiếu:</strong> IEC 62232, EN 50492 (trạm gốc), EN 50401 (thiết bị vô tuyến).</p>
                     <figure>
-                        <img src="https://placehold.co/800x350/2c3e50/ffffff?text=Xe+Co+Dong+Do+Kiem+EMF+(Drive+Test)" alt="Xe đo kiểm cơ động">
-                        <figcaption>Giải pháp đo kiểm lắp đặt trên xe cơ động (Drive Test) (Page 11 PDF)</figcaption>
+                        <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image005.png" alt="Xe đo kiểm cơ động">
+                        <figcaption>Giải pháp đo kiểm lắp đặt trên xe cơ động (Drive Test)</figcaption>
                     </figure>
                 </div>
 
@@ -594,8 +534,8 @@
                         Người dân có thể truy cập website công cộng hoặc ứng dụng điện thoại để xem mức độ phơi nhiễm tại vị trí của mình so với giới hạn quy định.
                     </p>
                     <figure>
-                        <img src="https://placehold.co/800x400/e70013/ffffff?text=Tunisia+Public+Map+Interface" alt="Bản đồ Tunisia">
-                        <figcaption>Giao diện bản đồ giám sát công khai tại Tunisia (Page 13 PDF)</figcaption>
+                        <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image006.png" alt="Bản đồ Tunisia">
+                        <figcaption>Giao diện bản đồ giám sát công khai tại Tunisia</figcaption>
                     </figure>
                 </div>
 
@@ -613,8 +553,8 @@
                         </ul>
                     </div>
                     <figure>
-                        <img src="https://placehold.co/800x400/800000/ffffff?text=Qatar+Stadium+Monitoring+(FIFA)" alt="Sân vận động Qatar">
-                        <figcaption>Giám sát EMF tại sân vận động và không gian công cộng tại Qatar (Page 14 PDF)</figcaption>
+                        <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image007.png" alt="Sân vận động Qatar">
+                        <figcaption>Giám sát EMF tại sân vận động và không gian công cộng tại Qatar</figcaption>
                     </figure>
                 </div>
 
@@ -640,8 +580,8 @@
                         <li><strong>Cam kết:</strong> Bảo hành 5 năm, thay thế thiết bị trong 15 ngày.</li>
                     </ul>
                     <figure>
-                        <img src="https://placehold.co/800x400/009c3b/ffffff?text=Brazil+Stadium+Setup" alt="Sân vận động Brazil">
-                        <figcaption>Lắp đặt thiết bị đo liên tục trong suốt quá trình diễn ra sự kiện thể thao (Page 16 PDF)</figcaption>
+                        <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image008.png" alt="Sân vận động Brazil">
+                        <figcaption>Lắp đặt thiết bị đo liên tục trong suốt quá trình diễn ra sự kiện thể thao</figcaption>
                     </figure>
                 </div>
 
@@ -662,8 +602,8 @@
                         Các trạm được lắp đặt tại trường học, bệnh viện, cao ốc. Kết quả đo được công bố trực tuyến tại website chính phủ.
                     </p>
                     <figure>
-                        <img src="https://placehold.co/800x400/e30a17/ffffff?text=Turkey+Sensor+Network+Map" alt="Bản đồ Thổ Nhĩ Kỳ">
-                        <figcaption>Bản đồ vị trí các trạm giám sát thí điểm tại Thổ Nhĩ Kỳ (Page 19 PDF)</figcaption>
+                        <img src="https://raw.githubusercontent.com/tuyenpv161/MonitEM/4c062006499031bee1cf454ec5357ee25258ad15/Gia%CC%89i%20pha%CC%81p%20gia%CC%81m%20sa%CC%81t%20khu%20vu%CC%9B%CC%A3c%20lie%CC%82n%20tu%CC%A3c%20MonitEM.fld/image009.png" alt="Bản đồ Thổ Nhĩ Kỳ">
+                        <figcaption>Bản đồ vị trí các trạm giám sát thí điểm tại Thổ Nhĩ Kỳ</figcaption>
                     </figure>
                 </div>
 
